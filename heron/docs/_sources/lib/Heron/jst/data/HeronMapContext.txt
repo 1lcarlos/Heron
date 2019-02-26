@@ -1,0 +1,51 @@
+
+.. currentmodule:: 
+
+:class:`.`
+================================================================================
+
+
+
+.. class:: HeronMapContext(config)
+
+  Manages global map context loading/saving and notifying observers.
+
+
+    
+
+
+
+
+
+
+Public Methods
+--------------
+
+Public methods.
+
+
+.. method:: .load
+
+    Load a Heron Map Context (HMC) from a resource (filepath or URL).
+    :Object config: config options
+    :return data: XML DOM Document with HMC
+
+
+
+
+Events
+------
+
+Events.
+
+
+.. describe:: failure
+
+    Fires if the context fails to load.
+
+.. describe:: loaded
+
+    Fires when mapcontext is loaded.
+
+
+

@@ -1,0 +1,128 @@
+
+.. currentmodule:: Heron.widgets
+
+:class:`Heron.widgets.LayerTreePanel`
+================================================================================
+
+
+.. cssclass:: meta
+
+
+Extends
+    * `Ext.tree.TreePanel <http://dev.sencha.com/deploy/ext-3.3.1/docs/?class=Ext.tree.TreePanel>`_
+    
+
+
+
+xtype
+    ``hr_layertreepanel``
+
+
+
+
+.. class:: LayerTreePanel(config)
+
+A panel designed to hold trees of Map Layers.
+
+
+    
+
+
+Config Options
+--------------
+
+Configuration properties in addition to
+those listed for `Ext.tree.TreePanel <http://dev.sencha.com/deploy/ext-3.3.1/docs/?class=Ext.tree.TreePanel>`_.
+
+
+.. describe:: contextMenu
+
+    Context menu (right-click) for layer nodes, for now instance of Heron.widgets.LayerNodeContextMenu. Default value is null.
+
+.. describe:: layerIcons
+
+    Which icons to use for Layers in LayerNodes. Values 'default' (use Ext JS standard icons), '
+    bylayertype' (Layer-type specific icons, e.g. for raster and vector) or
+    'none' (no, i.e. blanc icon). Default value is default'. Used, unless the Layer Nodes (gx_layer entries) are explicitly
+    configured with an 'iconCls', 'cls' or 'icon' config attribute.
+
+.. describe:: lines
+
+    Flag for showing tree lines
+    default value is "false".
+
+.. describe:: ordering
+
+    Ordering of layer in the map comparerd to custom layertree
+    default value is "none" (behaviour as in older versions)
+    valid values: 'TopBottom', 'none'
+
+.. describe:: textbaselayers
+
+    default value is "Base Layers".
+    Only valid if not using the 'hropts' option
+
+.. describe:: textoverlays
+
+    default value is "Overlays".
+    Only valid if not using the 'hropts' option
+
+.. describe:: title
+
+    default value is "Layers".
+
+.. describe:: useMapContext
+
+    Use the Heron Map Context (HMC) provided by Heron.App. The HMC defines a LayerTree. Default value is false.
+
+
+
+
+
+
+Public Methods
+--------------
+
+Public methods in addition to those
+listed for `Ext.tree.TreePanel <http://dev.sencha.com/deploy/ext-3.3.1/docs/?class=Ext.tree.TreePanel>`_.
+
+
+.. method:: LayerTreePanel.selectLayer
+
+    :arg record: ``GeoExt.data.LayerRecord``` Layer record.  Call with no
+        layer record to remove layer selection.
+    
+    TODO: change to selectLayers (plural)
+
+
+
+
+Events
+------
+
+Events in addition to those
+listed for `Ext.tree.TreePanel <http://dev.sencha.com/deploy/ext-3.3.1/docs/?class=Ext.tree.TreePanel>`_.
+
+
+.. describe:: beforelayerselectionchange
+
+    Fired before the selected set of layers changes.  Listeners
+    can return ``false`` to stop the selected layers from being
+    changed.
+    
+    Listeners arguments:
+    
+    * layerRecord - ``GeoExt.data.LayerRecord`` the record of the
+      selected layer, or null if no layer is selected.
+
+.. describe:: layerselectionchange
+
+    Fired when the selected set of layers changes.
+    
+    Listeners arguments:
+    
+    * layerRecord - ``GeoExt.data.LayerRecord`` the record of the
+      selected layer, or null if no layer is selected.
+
+
+

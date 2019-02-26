@@ -1,0 +1,115 @@
+
+.. currentmodule:: Heron.widgets
+
+:class:`Heron.widgets.SimpleTimeSliderPanel`
+================================================================================
+
+
+.. cssclass:: meta
+
+
+Extends
+    * `Ext.Panel <http://docs.sencha.com/extjs/3.4.0/#!/api/Ext.Panel>`_
+    
+
+
+
+xtype
+    ``hr_simpletimesliderpanel``
+
+
+
+
+.. class:: SimpleTimeSliderPanel(config)
+
+anel with a simple slider and date/time fields to manipulate WMS Layers with Time Dimension.
+
+
+
+
+Example Use
+-----------
+
+Panel with a simple slider and date/time fields to manipulate WMS Layers with Time Dimension.
+Given a time range (start/end time)
+the slider can be used to set a specific date/time. Layers configured for this Panel
+will need to support WMS-Dimension Time. When a date/time is set, all Layers
+are updated (mergeNewParams). This widget originally appeared in the HeronClient app
+within the Geonovum SOS Pilot project, see http://sensors.geonovum.nl/heronclient.
+
+This widget is called SimpleTimeSliderPanel, as there is also a more advanced Heron TimeSlider Panel
+see heron/ux/timeslider. Th e SimpleTimeSliderPanel can be configured with a starttime and an optional endtime.
+If the latter is not present the current date and time is taken. The steptime can be specified. All date/times are in
+ISO8601 notation. A steptime of one hour is e.g. PT1H'. In addition the Layer names need to be configured as
+only WMS (dimension) time-aware layers can be used.  Below is an example config as used in the related example.
+
+ .. code-block:: javascript
+
+       {
+           xtype: 'hr_simpletimesliderpanel',
+           title: 'Rain in the Netherlands since June 2014',
+           startDateTime: '2014-06-01T00:00:00Z',
+           // endDateTime: '2014-09-01T00:00:00Z',  default is current time
+           stepTime: 'PT1H',
+           dateTime: '2014-08-08T16:00:00Z',
+           layerNames: ["KNMI Radar Color", "KNMI Radar"]
+       }
+
+
+
+    
+
+
+Config Options
+--------------
+
+Configuration properties in addition to
+those listed for `Ext.Panel <http://docs.sencha.com/extjs/3.4.0/#!/api/Ext.Panel>`_.
+
+
+.. describe:: dateTime
+
+    Actual date and time for slider (where it should be initially) in ISO8601 notation. Example: '2014-10-14T00:00:00Z'.
+    Default is current date and time.
+
+.. describe:: dimensionName
+
+    The OGC WMS name for the Dimension to use as WMS Layer parameter. Default is 'time'
+
+.. describe:: dimensionUnits
+
+    The units for Dimension values. Default is ''ISO8601'
+
+.. describe:: endDateTime
+
+    End date and time for slider end in ISO8601 notation. Example: '2014-12-14T00:00:00Z'.
+    Default is current date and time.
+
+.. describe:: layerNames
+
+    Array of names, of the WMS Layers that should be refreshed with Time parameters whever the time changes.
+    The WMS Layers must support WMS Dimension for the dimensionName (default 'time') parameter.
+
+.. describe:: startDateTime
+
+    Start date and time for slider start in ISO8601 notation. Example: '2014-06-01T00:00:00Z'.
+    Default is current date and time.
+
+.. describe:: stepTime
+
+    Time step in slider and spinner widgets in ISO8601/OGC notation. Example: 'PT4H'.
+    Default is 'PT1H'.
+
+.. describe:: title
+
+    title of the panel
+    default value is "Simple Time Slider".
+
+
+
+
+
+
+
+
+

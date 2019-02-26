@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Heron get started</title>
+
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/extjs/3.4.1-1/resources/css/ext-all.css"/>
+
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/extjs/3.4.1-1/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/extjs/3.4.1-1/ext-all.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.js" type="text/javascript"></script> 
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/theme/default/style.css"/>
+    
+   <!--  
+	<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css">
+	<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script> -->
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/geoext/1.1/script/GeoExt.js" type="text/javascript"></script>
+
+    
+    <link rel="stylesheet" type="text/css" href="heron/resources/css/default.css"></link>
+    <script src="heron/script/Heron.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+            Heron.layout = {
+                    xtype: 'hr_mappanel',
+                    hropts: {
+                            layers: [new OpenLayers.Layer.OSM()
+                                    /*new OpenLayers.Layer.WMS( "World Map",
+                                      "http://tilecache.osgeo.org/wms-c/Basic.py?", {layers: 'basic', format: 'image/png' } )*/
+                                      /*new OpenLayers.Layer.WMS("World image",
+                                      	'http://www2.demis.nl/wms/wms.ashx?WMS=BlueMarble',
+            							{layers: "Earth Image", format: 'image/png'})*/
+
+/*new OpenLayers.Layer.WMS(
+            "World schematic",
+            'http://www2.demis.nl/wms/wms.ashx?WMS=WorldMap',
+            {layers: "Countries,Borders,Coastlines", format: 'image/png'}
+    )*/
+                            ]
+                    }
+            };
+    </script>
+</head>
+<body>
+	<script type="text/javascript" src="heron/options.js"></script>
+<script type="text/javascript" src="heron/main.js"></script>
+
+</body>
+</html>

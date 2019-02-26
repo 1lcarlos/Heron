@@ -1,0 +1,38 @@
+
+.. currentmodule:: 
+
+:class:`.`
+================================================================================
+
+
+
+.. class:: OWSCapabilitiesCache(options)
+
+Manages OWS Capabilities documents. Allows notifying observers.
+
+
+    
+
+
+
+
+
+
+
+
+Events
+------
+
+Events.
+
+
+.. describe:: failure
+
+    Fires if the capabilities doc fails to load.
+
+.. describe:: loaded
+
+    Fires when capabilities doc is loaded and cached.
+
+
+

@@ -1,0 +1,456 @@
+
+.. currentmodule:: GeoExt
+
+:class:`GeoExt.Popup`
+================================================================================
+
+
+.. cssclass:: meta
+
+
+Extends
+    * `Ext.Window <http://dev.sencha.com/deploy/dev/docs/?class=Ext.Window>`_
+    
+
+
+
+xtype
+    ``gx_popup``
+
+
+
+
+.. class:: Popup(config)
+
+    Popups are a specialized Window that supports anchoring
+    to a particular location in a MapPanel.  When a popup
+    is anchored to a location, that means that the popup
+    will visibly point to the location on the map, and move
+    accordingly when the map is panned or zoomed.
+
+
+
+Example Use
+-----------
+
+Sample code to create a popup anchored to a feature:
+
+.. code-block:: javascript
+
+    var popup = new GeoExt.Popup({
+        title: "My Popup",
+        location: feature,
+        width: 200,
+        html: "<div>Popup content</div>",
+        collapsible: true
+    });
+
+    
+
+
+Config Options
+--------------
+
+Configuration properties in addition to
+those listed for `Ext.Window <http://dev.sencha.com/deploy/dev/docs/?class=Ext.Window>`_.
+
+
+.. describe:: ancCls
+
+    ``String``  CSS class name for the popup's anchor.
+
+.. describe:: anchored
+
+    ``Boolean``  The popup begins anchored to its location.  Default is
+    ``true``.
+
+.. describe:: anchorPosition
+
+    ``String``  Controls the anchor position for the popup. If set to
+    ``auto``, the anchor will be positioned on the top or the bottom of
+    the window, minimizing map movement. Supported values are ``bottom-left``,
+    ``bottom-right``, ``top-left``, ``top-right`` or ``auto``.
+    Defaults to ``auto``.
+
+.. describe:: autoLoad
+
+    ``Boolean`` If set to true, the capabilities will be loaded upon
+    instance creation, and ``loadCapabilities`` does not need to be called
+    manually. Setting this when ``capabilities`` and no ``url`` is provided
+    has no effect. Default is false.
+
+.. describe:: baseParams
+
+    ``Object`` Key-value pairs of base params to be add to every
+    request to the service. Optional.
+
+.. describe:: capabilities
+
+    ``Object`` Capabilities of the print service. Only required if ``url``
+    is not provided. This is the object returned by the ``info.json``
+    endpoint of the print service, and is usually obtained by including a
+    script tag pointing to
+    http://path/to/printservice/info.json?var=myvar in the head of the
+    html document, making the capabilities accessible as ``window.myvar``.
+    This property should be used when no local print service or proxy is
+    available, or when you do not listen for the ``loadcapabilities``
+    events before creating components that require the PrintProvider's
+    capabilities to be available.
+
+.. describe:: encoding
+
+    ``String`` The encoding to set in the headers when requesting the print
+    service. Prevent character encoding issues, especially when using IE.
+    Default is retrieved from document charset or characterSet if existing
+    or ``UTF-8`` if not.
+
+.. describe:: location
+
+    ``OpenLayers.Feature.Vector`` or ``OpenLayers.LonLat`` or
+    ``OpenLayers.Pixel`` or ``OpenLayers.Geometry`` A location for this
+    popup's anchor.
+
+.. describe:: map
+
+    ``OpenLayers.Map`` or :class:`GeoExt.MapPanel`
+    The map this popup will be anchored to (only required if ``anchored``
+    is set to true and the map cannot be derived from the ``location``'s
+    layer.
+
+.. describe:: method
+
+    ``String`` Either ``POST`` or ``GET`` (case-sensitive). Method to use
+    when sending print requests to the servlet. If the print service is at
+    the same origin as the application (or accessible via proxy), then
+    ``POST`` is recommended. Use ``GET`` when accessing a remote print
+    service with no proxy available, but expect issues with character
+    encoding and URLs exceeding the maximum length. Default is ``POST``.
+
+.. describe:: panIn
+
+    ``Boolean`` The popup should pan the map so that the popup is
+    fully in view when it is rendered.  Default is ``true``.
+
+.. describe:: popupCls
+
+    ``String`` CSS class name for the popup DOM elements.  Default is
+    "gx-popup".
+
+.. describe:: printProvider
+
+    ``GeoExt.data.PrintProvider`` The print provider to use with this
+    plugin's field. Not required if set on the owner container of the
+    field.
+
+.. describe:: timeout
+
+    ``Number`` Timeout of the POST Ajax request used for the print request
+    (in milliseconds). Default of 30 seconds. Has no effect if ``method``
+    is set to ``GET``.
+
+.. describe:: unpinnable
+
+    ``Boolean`` The popup should have a "unpin" tool that unanchors it from
+    its location.  Default is ``true``.
+
+.. describe:: url
+
+    ``String`` Base url of the print service. Only required if
+    ``capabilities`` is not provided. This
+    is usually something like http://path/to/mapfish/print for Mapfish,
+    and http://path/to/geoserver/pdf for GeoServer with the printing
+    extension installed. This property requires that the print service is
+    at the same origin as the application (or accessible via proxy).
+
+
+
+
+Public Properties
+-----------------
+
+Public properties in addition to those
+listed for `Ext.Window <http://dev.sencha.com/deploy/dev/docs/?class=Ext.Window>`_.
+
+
+.. attribute:: Popup.customParams
+
+    ``Object`` Key-value pairs of custom data to be sent to the print
+    service. Optional. This is e.g. useful for complex layout definitions
+    on the server side that require additional parameters.
+
+.. attribute:: Popup.defaultOutputFormatName
+
+    ``String`` the name of the default output format.
+
+.. attribute:: Popup.dpi
+
+    ``Ext.data.Record`` the record for the currently used resolution.
+    Read-only, use ``setDpi`` to set the value.
+
+.. attribute:: Popup.dpis
+
+    ``Ext.data.JsonStore`` read-only. A store representing the dpis
+    available.
+    
+    Fields of records in this store:
+    
+    * name - ``String`` the name of the dpi
+    * value - ``Float`` the dots per inch
+
+.. attribute:: Popup.layout
+
+    ``Ext.data.Record`` the record of the currently used layout. Read-only,
+    use ``setLayout`` to set the value.
+
+.. attribute:: Popup.layouts
+
+    ``Ext.data.JsonStore`` read-only. A store representing the layouts
+    available.
+    
+    Fields of records in this store:
+    
+    * name - ``String`` the name of the layout
+    * size - ``Object`` width and height of the map in points
+    * rotation - ``Boolean`` indicates if rotation is supported
+
+.. attribute:: Popup.outputFormat
+
+    ``Ext.data.Record`` the record of the currently used output format. Read-only,
+    use ``setOutputFormat`` to set the value.
+
+.. attribute:: Popup.outputFormats
+
+    ``Ext.data.JsonStore`` read-only. A store representing the output formats
+    available.
+    
+    Fields of the output formats in this store:
+    
+    * name - ``String`` the name of the output format
+
+.. attribute:: Popup.outputFormatsEnabled
+
+    ``Boolean`` read-only. Should outputFormats be populated and used?
+    Default value is 'False'
+
+.. attribute:: Popup.scales
+
+    ``Ext.data.JsonStore`` read-only. A store representing the scales
+    available.
+    
+    Fields of records in this store:
+    
+    * name - ``String`` the name of the scale
+    * value - ``Float`` the scale denominator
+
+
+
+
+Public Methods
+--------------
+
+Public methods in addition to those
+listed for `Ext.Window <http://dev.sencha.com/deploy/dev/docs/?class=Ext.Window>`_.
+
+
+.. method:: Popup.loadCapabilities
+
+    Loads the capabilities from the print service. If this instance is
+    configured with either ``capabilities`` or a ``url`` and ``autoLoad``
+    set to true, then this method does not need to be called from the
+    application.
+
+.. method:: Popup.print
+
+    :param map: ``GeoExt.MapPanel`` or ``OpenLayers.Map`` The map to print.
+    :param pages: ``Array`` of :class:`GeoExt.data.PrintPage` or
+        :class:`GeoExt.data.PrintPage` page(s) to print.
+    :param options: ``Object`` of additional options, see below.
+    
+    Sends the print command to the print service and opens a new window
+    with the resulting PDF.
+    
+    Valid properties for the ``options`` argument:
+    
+        * ``legend`` - :class:`GeoExt.LegendPanel` If provided, the legend
+          will be added to the print document. For the printed result to
+          look like the LegendPanel, the following ``!legends`` block
+          should be included in the ``items`` of your page layout in the
+          print module's configuration file:
+    
+          .. code-block:: none
+    
+            - !legends
+                maxIconWidth: 0
+                maxIconHeight: 0
+                classIndentation: 0
+                layerSpace: 5
+                layerFontSize: 10
+    
+        * ``overview`` - :class:`OpenLayers.Control.OverviewMap` If provided,
+          the layers for the overview map in the printout will be taken from
+          the OverviewMap control. If not provided, the print service will
+          use the main map's layers for the overview map. Applies only for
+          layouts configured to print an overview map.
+
+.. method:: Popup.setDpi
+
+    :param dpi: ``Ext.data.Record`` the dpi record.
+    
+    Sets the dpi for this printProvider.
+
+.. method:: Popup.setLayout
+
+    :param layout: ``Ext.data.Record`` the record of the layout.
+    
+    Sets the layout for this printProvider.
+
+.. method:: Popup.setOutputFormat
+
+    :param outputFormat: ``Ext.data.Record`` the format record.
+    
+    Sets the output print format for this printProvider.
+
+.. method:: Popup.setSize
+
+    :param w: ``Integer``
+    :param h: ``Integer``
+    
+    Sets the size of the popup, taking into account the size of the anchor.
+
+.. method:: Popup.update
+
+    Update rule titles and symbolizers.
+
+
+
+
+Events
+------
+
+Events in addition to those
+listed for `Ext.Window <http://dev.sencha.com/deploy/dev/docs/?class=Ext.Window>`_.
+
+
+.. describe:: beforeencodelayer
+
+    Triggered before a layer is encoded. This can be used to
+    exclude layers from the printing, by having the listener
+    return false.
+    
+    Listener arguments:
+    
+    * printProvider - :class:`GeoExt.data.PrintProvider` this
+      PrintProvider
+    * layer - ``OpenLayers.Layer`` the layer which is about to be
+      encoded.
+
+.. describe:: beforeencodelegend
+
+    Triggered before the legend is encoded. If the listener
+    returns false, the default encoding based on GeoExt.LegendPanel
+    will not be executed. This provides an option for application
+    to get legend info from a custom component other than
+    GeoExt.LegendPanel.
+    
+    Listener arguments:
+    
+    * printProvider - :class:`GeoExt.data.PrintProvider` this
+      PrintProvider
+    * jsonData - ``Object`` The data that will be sent to the print
+      server. Can be used to populate jsonData.legends.
+    * legend - ``Object`` The legend supplied in the options which were
+      sent to the print function.
+
+.. describe:: beforeprint
+
+    Triggered when the print method is called.
+    TODO: rename this event to beforeencode
+    
+    Listener arguments:
+    
+    * printProvider - :class:`GeoExt.data.PrintProvider` this
+      PrintProvider
+    * map - ``OpenLayers.Map`` the map being printed
+    * pages - Array of :class:`GeoExt.data.PrintPage` the print
+      pages being printed
+    * options - ``Object`` the options to the print command
+
+.. describe:: dpichange
+
+    Triggered when the dpi value is changed.
+    
+    Listener arguments:
+    
+    * printProvider - :class:`GeoExt.data.PrintProvider` this
+      PrintProvider
+    * dpi - ``Ext.data.Record`` the new dpi record
+
+.. describe:: encodelayer
+
+    Triggered when a layer is encoded. This can be used to modify
+    the encoded low-level layer object that will be sent to the
+    print service.
+    
+    Listener arguments:
+    
+    * printProvider - :class:`GeoExt.data.PrintProvider` this
+      PrintProvider
+    * layer - ``OpenLayers.Layer`` the layer which is about to be
+      encoded.
+    * encodedLayer - ``Object`` the encoded layer that will be
+      sent to the print service.
+
+.. describe:: layoutchange
+
+    Triggered when the layout is changed.
+    
+    Listener arguments:
+    
+    * printProvider - :class:`GeoExt.data.PrintProvider` this
+      PrintProvider
+    * layout - ``Ext.data.Record`` the new layout
+
+.. describe:: loadcapabilities
+
+    Triggered when the capabilities have finished loading. This
+    event will only fire when ``capabilities`` is not  configured.
+    
+    Listener arguments:
+    
+    * printProvider - :class:`GeoExt.data.PrintProvider` this
+      PrintProvider
+    * capabilities - ``Object`` the capabilities
+
+.. describe:: outputformatchange
+
+    Triggered when the outputFormat  value is changed.
+    
+    Listener arguments:
+    
+    * printProvider - :class:`GeoExt.data.PrintProvider` this
+      PrintProvider
+    * outputFormat - ``Ext.data.Record`` the new output format record
+
+.. describe:: print
+
+    Triggered when the print document is opened.
+    
+    Listener arguments:
+    
+    * printProvider - :class:`GeoExt.data.PrintProvider` this
+      PrintProvider
+    * url - ``String`` the url of the print document
+
+.. describe:: printexception
+
+    Triggered when using the ``POST`` method, when the print
+    backend returns an exception.
+    
+    Listener arguments:
+    
+    * printProvider - :class:`GeoExt.data.PrintProvider` this
+      PrintProvider
+    * response - ``Object`` the response object of the XHR
+
+
+
