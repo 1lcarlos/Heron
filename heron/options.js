@@ -65,13 +65,58 @@ Heron.options.map.layers = [
             {singleTile: true, isBaseLayer: true, visibility: false, noLegend: true}
     ),*/
 
-
+    /*new OpenLayers.Layer.OSM('open street map', 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+        {singleTile: true, isBaseLayer: true, visibility: true, noLegend: true}),*/
     new OpenLayers.Layer.WMS(
             "World image",
             'http://www2.demis.nl/wms/wms.ashx?WMS=BlueMarble',
             {layers: "Earth Image", format: 'image/png'},
             {singleTile: true, isBaseLayer: true, visibility: true, noLegend: true}
-    )
+    ),
+//http://localhost:8080/geoserver/VisorWeb/wms?service=WMS&version=1.1.0&request=GetMap&layers=VisorWeb%3APadua
+ new OpenLayers.Layer.WMS("Imagen Satelital","http://localhost:8080/geoserver/Quifa/wms",
+    {layers : 'Quifa:Corte_Quifa_Jp2', transparent: true, format: 'image/png'},
+    {isBaseLayer: false, visibility: false}),
+
+new OpenLayers.Layer.WMS("Grupo Quifa","http://localhost:8080/geoserver/Quifa/wms",
+    {layers : 'Quifa:GrupoQuifa', transparent: true, format: 'image/png'},
+    {isBaseLayer: false, visibility: true}),
+new OpenLayers.Layer.Vector("USA States (OpenGeo, WFS)", {
+        //minScale: 15000000,
+        strategies: [new OpenLayers.Strategy.BBOX()],
+        styleMap: new OpenLayers.StyleMap(
+                {'strokeColor': '#222222', 'fillColor': '#eeeeee', graphicZIndex: 1, fillOpacity: 0.8}),
+        visibility: true,
+        protocol: new OpenLayers.Protocol.WFS({
+            url: 'http://localhost:8080/geoserver/topp/ows',
+            featurePrefix: 'topp',
+            featureType: "states"//,
+            //featureNS: 'http://www.openplans.org/topp'
+        })
+    }),
+new OpenLayers.Layer.Vector("Unidad Territorial", {
+        //minScale: 15000000,
+        strategies: [new OpenLayers.Strategy.BBOX()],
+        styleMap: new OpenLayers.StyleMap(
+                {'strokeColor': '#222222', 'fillColor': '#eeeeee', graphicZIndex: 1, fillOpacity: 0.8}),
+        visibility: false,
+        protocol: new OpenLayers.Protocol.WFS({
+            url: 'http://localhost:8080/geoserver/Quifa/ows',
+            featurePrefix: 'Quifa',
+            featureType: "Vias"            
+        })
+    }),
+
+/*new OpenLayers.Layer.WMS("IUnidad Territorial","http://localhost:8080/geoserver/VisorWeb/wms",
+    {layers : 'VisorWeb:UnidadTerritorial1', transparent: true, format: 'image/png'},
+    {isBaseLayer: false, visibility: false}),*/
+ 
+  /*new OpenLayers.Layer.WMS("State Boundaries",// como llamar un servicio de Geoserver
+            "http://demo.boundlessgeo.com/geoserver/wms", 
+            {'layers': 'topp:tasmania_state_boundaries', transparent: true, format: 'image/gif'},
+            {isBaseLayer: false}
+        )*/
+
 
     /*
      * ==================================
