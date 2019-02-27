@@ -107,7 +107,7 @@ new OpenLayers.Layer.Vector("Unidad Territorial", {
         })
     }),
 
-/*new OpenLayers.Layer.WMS("IUnidad Territorial","http://localhost:8080/geoserver/VisorWeb/wms",
+new OpenLayers.Layer.WMS("IUnidad Territorial","http://localhost:8080/geoserver/VisorWeb/wms",
     {layers : 'VisorWeb:UnidadTerritorial1', transparent: true, format: 'image/png'},
     {isBaseLayer: false, visibility: false}),*/
  
@@ -115,7 +115,7 @@ new OpenLayers.Layer.Vector("Unidad Territorial", {
             "http://demo.boundlessgeo.com/geoserver/wms", 
             {'layers': 'topp:tasmania_state_boundaries', transparent: true, format: 'image/gif'},
             {isBaseLayer: false}
-        )*/
+        )
 
 
     /*
