@@ -151,7 +151,44 @@ Heron.layout = {
 					maxFeatures: 10
 				} */
 			]
-		},
+		},//comienza el panel de la info
+		/*{
+			xtype: 'panel',
+
+			id: 'hr-map-featureinfo-container',
+			layout: 'border',
+			region: 'center',
+			width: '100%',
+			collapsible: false,
+			split: false,
+			border: false,
+			items: [
+				{
+					xtype: 'hr_mappanel',
+					title: '&nbsp;',
+					id: 'hr-map',
+					region: 'center',
+					collapsible: false,
+					border: false,
+					hropts: Heron.options.map
+				},
+				{
+					xtype: 'hr_featureinfopanel',
+					id: 'hr-feature-info',
+					region: "south",
+					border: true,
+					collapsible: true,
+					collapsed: true,
+					height: 205,
+					split: false,
+                    showTopToolbar: true,
+                    displayPanels: ['Table'],
+					// Export to download file. Option values are 'CSV', 'XLS', default is no export (results in no export menu).
+                    exportFormats: ['CSV', 'XLS', 'GMLv2', 'Shapefile', 'GeoJSON', 'WellKnownText'],
+					maxFeatures: 10
+				}
+			]
+		},*/
 		{
 			xtype: 'panel',
 

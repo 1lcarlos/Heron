@@ -93,23 +93,55 @@ new OpenLayers.Layer.Vector("USA States (OpenGeo, WFS)", {
             featureType: "states"//,
             //featureNS: 'http://www.openplans.org/topp'
         })
-    }),
-new OpenLayers.Layer.Vector("Unidad Territorial", {
+    }),//subir un wfs, tener en cuenta la proyeccion (debe estar en WGS84: 4326) y el atributo de la geometria, en algunos casos sera el geom y en otro sera the_geom
+new OpenLayers.Layer.Vector("UnidadTerritorial(WFS)", {
         //minScale: 15000000,
         strategies: [new OpenLayers.Strategy.BBOX()],
         styleMap: new OpenLayers.StyleMap(
                 {'strokeColor': '#222222', 'fillColor': '#eeeeee', graphicZIndex: 1, fillOpacity: 0.8}),
         visibility: false,
         protocol: new OpenLayers.Protocol.WFS({
-            url: 'http://localhost:8080/geoserver/Quifa/ows',
-            featurePrefix: 'Quifa',
-            featureType: "Vias"            
+            url: 'http://localhost:8080/geoserver/VisorWeb/ows',
+            featureType: 'UnidadTerritorial1',
+            featurePrefix: 'VisorWeb',
+
+            //featureNS:'http://localhost:8080/Quifa',            
+            //srsName: 'EPSG:3117',
+            geometryName: 'geom',
+            //version: '1.1.0'           
         })
     }),
 
+new OpenLayers.Layer.Vector("VIAS", {
+        //minScale: 15000000,
+        strategies: [new OpenLayers.Strategy.BBOX()],
+        styleMap: new OpenLayers.StyleMap(
+                {'strokeColor': '#222222', 'fillColor': '#eeeeee', graphicZIndex: 1, fillOpacity: 0.8}),
+        visibility: false,
+        protocol: new OpenLayers.Protocol.WFS({
+            url: 'http://localhost:8080/geoserver/VisorWeb/ows',
+            featureType: 'vias',
+            featurePrefix: 'VisorWeb',
+
+            //featureNS:'http://localhost:8080/Quifa',            
+            //srsName: 'EPSG:4326',
+            geometryName: 'geom'
+            //version: '1.1.0'           
+        })
+    }),
+
+/*new OpenLayers.Protocol.WFS({
+    version: "1.1.0",
+    url:  'http://localhost:8080/geoserver/Quifa/ows',
+    featurePrefix: 'Quifa',
+    featureType: "Vias",
+    //featureNS: "http://www.openplans.org/topp",
+    //geometryName: "geom"
+}),*/
+
 new OpenLayers.Layer.WMS("IUnidad Territorial","http://localhost:8080/geoserver/VisorWeb/wms",
     {layers : 'VisorWeb:UnidadTerritorial1', transparent: true, format: 'image/png'},
-    {isBaseLayer: false, visibility: false}),*/
+    {isBaseLayer: false, visibility: false}),
  
   /*new OpenLayers.Layer.WMS("State Boundaries",// como llamar un servicio de Geoserver
             "http://demo.boundlessgeo.com/geoserver/wms", 
@@ -149,6 +181,25 @@ new OpenLayers.Layer.WMS("IUnidad Territorial","http://localhost:8080/geoserver/
 Heron.options.map.toolbar = [
     {type: "scale", options: {width: 110}},
     {type: "-"} ,
+    {type: "featureinfo", options: {
+        popupWindow: {
+            width: 360,
+            height: 200,
+            featureInfoPanel: {
+                showTopToolbar: true,
+
+                // Should column-names be capitalized? Default true.
+                columnCapitalize: true,
+
+                // displayPanels option values are 'Table' and 'Detail', default is 'Table'
+                // displayPanels: ['Table', 'Detail']
+                // Export to download file. Option values are 'CSV', 'XLS', default is no export (results in no export menu).
+                // 'GeoPackage' needs heron.cgi with GDAL 1.1+ !!
+                exportFormats: ['CSV', 'XLS', 'GMLv2', 'Shapefile', 'GeoPackage', 'GeoJSON', 'WellKnownText'],
+                maxFeatures: 10
+            }
+        }
+    }},
     {type: "featureinfo", options: {popupWindow: {}}},
     {type: "-"} ,
     {type: "pan"},
