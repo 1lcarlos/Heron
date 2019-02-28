@@ -26,6 +26,8 @@
  * Common settings for MapPanel
  * These will be assigned as "hropts" within the MapPanel config
  */
+ //OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+
 Ext.namespace("Heron.options.map");
 Heron.options.map.settings = {
     projection: 'EPSG:4326',
@@ -38,6 +40,30 @@ Heron.options.map.settings = {
     zoom: 4,
     theme: null
 };
+
+Ext.namespace("Heron.options.wfs");
+Heron.options.wfs.downloadFormats = [
+    {
+        name: 'CSV',
+        outputFormat: 'csv',
+        fileExt: '.csv'
+    },
+    {
+        name: 'GML (version 2.1.2)',
+        outputFormat: 'text/xml; subtype=gml/2.1.2',
+        fileExt: '.gml'
+    },
+//    {
+//        name: 'ESRI Shapefile (zipped)',
+//        outputFormat: 'SHAPE-ZIP',
+//        fileExt: '.zip'
+//    },
+    {
+        name: 'GeoJSON',
+        outputFormat: 'json',
+        fileExt: '.json'
+    }
+];
 
 /*
  * Layers to be added to the map.
@@ -94,6 +120,23 @@ new OpenLayers.Layer.Vector("USA States (OpenGeo, WFS)", {
             //featureNS: 'http://www.openplans.org/topp'
         })
     }),//subir un wfs, tener en cuenta la proyeccion (debe estar en WGS84: 4326) y el atributo de la geometria, en algunos casos sera el geom y en otro sera the_geom
+
+/*new OpenLayers.Layer.WMS(
+            "USA States (Boundless)",
+            'http://demo.boundlessgeo.com/geoserver/ows?',
+            {layers: "states", transparent: true, format: 'image/png'},
+            {singleTile: true, opacity: 0.9, isBaseLayer: false, visibility: false, noLegend: false, featureInfoFormat: 'application/vnd.ogc.gml', transitionEffect: 'resize', metadata: {
+                wfs: {
+                    protocol: 'fromWMSLayer',
+                    featurePrefix: 'topp',
+                    featureNS: 'http://www.openplans.org/topp',
+                    downloadFormats: Heron.options.wfs.downloadFormats
+                }
+            }
+            }
+    ),*/
+
+
 new OpenLayers.Layer.Vector("UnidadTerritorial(WFS)", {
         //minScale: 15000000,
         strategies: [new OpenLayers.Strategy.BBOX()],
